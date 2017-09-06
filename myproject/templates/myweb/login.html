@@ -1,0 +1,58 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+
+{%block block_name%}
+    <!-- 登录框 pc端-->
+    <div class="row clearfix login">
+        <div class="col-md-12 column login1">
+            <div class="login2 center-block clearfix">
+                <div class="login3 center-block clearfix">
+                    <form action="">
+                        <div class="otherlogin">选择其他方式登录</div>
+                        <div class="loginhead clearfix">登 录</div>
+                        <div class="qqlogin">
+                            <a href=""><img src="{% static "myweb/images/qqlogin.png" %}" width="100%" alt=""></a>
+                        </div>
+                        
+                        <div class="loginname">
+                            <input name="username" type="text" class="form-control" id="name" placeholder="手机,邮箱或用户名">
+                        </div>
+                        <div class="wblogin">
+                            <a href=""><img src="{% static "myweb/images/wblogin.png" %}" width="100%" alt=""></a>
+                        </div>
+                        <div class="loginname">
+                            <input name="password" type="password" class="form-control" id="name" placeholder="密码">
+                        </div>
+                        <div class="forgetpw"><a>忘记密码</a></div>
+                        <div class="tijiao">
+                            <button>确认</button>
+                        </div>
+                        <div class="myzc"><span>没有一加账户?</span><a href="{% url 'register' %}">立即注册</a></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 登录框 移动端 -->
+    <div class="row clearfix">
+        <div class="col-xs-12">
+            <div class="loginM clearfix">
+                <div class="erzi">
+                    <form action="">
+                        <div class="denglu">登录</div>
+                        <div class="loginnameM"><input name="username" type="text" class="form-control" id="name" placeholder="手机,邮箱或用户名"></div>
+                        <div class="loginpasswordM"><input name="password" type="password" class="form-control" id="name" placeholder="密码"></div>
+                        <div class="forgetM">忘记密码</div>
+                        <div class="tijiaoM">
+                            <button ty>确认</button>
+                        </div>
+                        <div class="signupM">没有一加账户><a href="{% url 'register' %}">立即注册</a></div>
+                        <div class="otherM">选择其他方式登陆</div>
+                        <div><img src="{% static "myweb/images/qqlogin.png" %}" alt="" width="100%"></div>
+                        <div class="wbloginM"><img src="{% static "myweb/images/wblogin.png" %}" alt="" width="100%"></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}
