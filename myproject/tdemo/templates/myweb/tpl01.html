@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Django 框架的模板实例</title>
+</head>
+<body>
+    <h1>Django 框架的模板实例--模板标签</h1>
+    <a href="{% url 'index'%}">返回首页</a>
+    <ul>
+        <li>在模板中输出一个参数：</li>
+        <li>在模板中输出list值数：
+            {% for vo in a %}
+                {{vo}},
+            
+            {% endfor%}
+        </li>
+
+        <li>
+            {%if uname2 %}
+               你好！{{uname}}
+            {%else%}
+                未登录
+            {%endif%}
+
+        </li>
+        <li>
+            {{ value|date:"D d M Y" }}
+        </li>
+    
+    </ul>
+    
+</body>
+</html>

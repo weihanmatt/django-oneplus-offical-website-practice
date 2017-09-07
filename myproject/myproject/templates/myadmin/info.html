@@ -1,0 +1,16 @@
+{% extends "myadmin/base.html" %}
+{% load static from staticfiles %}
+
+{%block block_name%}
+	<center>
+		<h1>{{ info }}</h1>
+		<br>
+		<a href="{% url 'myadmin_browseuser' 1 %}">返回</a>	
+	</center>
+
+
+
+
+
+
+{% endblock %}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <title>用户信息管理</title>
+    </head>
+    <body>
+        <center>
+            {% include "mytest/users/menu.html" %}
+            
+            <h3>修改用户信息</h3>
+            <form action="{% url 'updateusers' ob.id %}" method="post">
+            {% csrf_token %}
+            <table width="280" border="0">
+
+               <tr>
+                 <td>姓名：</td>
+                 <td><input type="text" name="name" value="{{ob.name}}" /></td>
+               </tr>
+                <tr>
+                 <td>年龄：</td>
+                 <td><input type="text" name="age" value="{{ob.age}}" /></td>
+               </tr>
+               <tr>
+                 <td>电话：</td>
+                 <td><input type="text" name="phone" value="{{ob.phone}}" /></td>
+
+               </tr> 
+                 <td colspan="2" align="center">
+                    <input type="submit" value="编辑"/>
+                    <input type="reset" value="重置"/>
+                 </td>
+               </tr>
+            </table>
+            </form>
+        </center>
+    </body>
+</html>

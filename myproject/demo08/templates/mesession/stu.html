@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Web的使用操作</title>
+  <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+</head>
+<body>
+
+    <center>
+		<h1>信息分页实例</h1>
+		{# <a href="{% url 'index' %}">返回首页</a> #}
+        <br/><br/>
+        <table width="70%" border="1">
+            <tr>
+                <th>学号</th>
+                <th>姓名</th>
+                <th>年龄</th>
+                <th>性别</th>
+                <th>班级</th>
+            </tr>
+            {% for stu in stulist %}
+                <tr>
+                   <td>{{ stu.id }}</td> 
+                   <td>{{ stu.name }}</td> 
+                   <td>{{ stu.age }}</td> 
+                   <td>{{ stu.sex }}</td> 
+                   <td>{{ stu.classid }}</td> 
+                </tr>
+            {% endfor %}
+        </table>
+        <br/>
+            <ul class="pagination">
+            {%for pindex in plist%}
+                <li><a href={% url 'stu' pindex %}>{{pindex}}</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+            {% endfor %}
+            </ul>
+    </center>
+</body>
+</html>
