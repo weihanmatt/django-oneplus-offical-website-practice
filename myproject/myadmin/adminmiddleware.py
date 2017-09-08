@@ -12,7 +12,7 @@ class AdminMiddleware(object):
 
     def __call__(self, request):
         # 定义网站后台不用登录也可访问的路由url
-        urllist = ['/myadmin/login','/myadmin/dologin','/myadmin/logout']
+        urllist = ['/myadmin/login','/myadmin/dologin','/myadmin/logout','/myadmin/verifycode']
         # 获取当前请求路径
         path = request.path
         #print("Hello World!"+path)

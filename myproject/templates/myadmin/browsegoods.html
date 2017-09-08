@@ -1,0 +1,104 @@
+{% extends "myadmin/base.html" %}
+{% load static from staticfiles %}
+{% load dealwithtime %}
+
+{%block block_name%}
+				<div class="span9">
+					<h1>
+						商品信息
+					</h1>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>
+									ID
+								</th>
+								<th>
+									类别ID
+								</th>
+								<th>
+									商品名称
+								</th>
+								<th>
+									生产厂商
+								</th>
+								<th>
+									价格
+								</th>
+								<th>
+									图片名称
+								</th>
+								<th>
+									数量
+								</th>
+								<th>
+									状态
+								</th>
+								<th>
+									添加时间
+								</th>
+								<th>
+									点击数
+								</th>
+								<th>
+									商品描述
+								</th>	
+								<th>
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for goods in goodslist %}
+							<tr>
+								<td>
+									{{goods.id}}
+								</td>
+								<td>
+									{{goods.typeid}}
+								</td>
+								<td>
+									{{goods.name}}
+								</td>
+								<td>
+									{{goods.company}}
+								</td>
+								<td>
+									{{goods.price}}
+								</td>
+								<td>
+									{{goods.picname}}
+								</td>
+								<td>
+									{{goods.num}}
+								</td>
+								<td>
+									{{goods.status}}
+								</td>
+								<td>
+									{{goods.addtime|dealwithtime}}
+								</td>
+								<td>
+									{{goods.clicknum}}
+								</td>
+								<td>
+									{{goods.descr}}
+								</td>
+								<td>
+									<a href="{% url 'myadmin_edituser' user.id %}">编辑</a>	
+									<a href="javascript:doDel('{% url 'myadmin_deleteuser' user.id %}');">删除</a>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>				
+					<div class="pagination">
+					{%for pindex in plist%}
+						<ul>
+							<li><a href={% url 'myadmin_browseuser' pindex %}>{{pindex}}</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+						</ul>
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+{% endblock %}

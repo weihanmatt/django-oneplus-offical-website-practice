@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^login$', views.login, name="myadmin_login"),
     url(r'^dologin$', views.dologin, name="myadmin_dologin"),
     url(r'^logout$', views.logout, name="myadmin_logout"),
+    url(r'^verifycode$', views.verifycode, name="myadmin_verifycode"),
 
 
     url(r'^adduser$', views.adduser, name="myadmin_adduser"),

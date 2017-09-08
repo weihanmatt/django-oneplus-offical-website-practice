@@ -73,8 +73,7 @@
 									{{user.addtime|dealwithtime}}
 								</td>
 								<td>
-									<a href="{% url 'myadmin_edituser' user.id %}">编辑</a>
-									<br>	
+									<a href="{% url 'myadmin_edituser' user.id %}">编辑</a>	
 									<a href="javascript:doDel('{% url 'myadmin_deleteuser' user.id %}');">删除</a>
 								</td>
 							</tr>

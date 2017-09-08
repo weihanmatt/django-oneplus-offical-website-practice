@@ -8,14 +8,26 @@
 		<link href="{% static 'myadmin/css/bootstrap.min.css' %} " rel="stylesheet">
 		<link href="{% static 'myadmin/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
 		<link href="{% static 'myadmin/css/site.css' %}" rel="stylesheet">
+		<style type="text/css">
+			#ccc{
+				width: 60px;
+			}
+			#ci{
+				margin-bottom: 10px;
+				margin-left: 10px;
+			}
+		</style>
 	</head>
+
 	<body>
 		<div id="login-page" class="container">
 			<h1>商城管理登录</h1>
 			<form id="login-form" class="well" action="{% url 'myadmin_dologin' %}" method="post">
 			{% csrf_token %}
-			<input type="text" class="span2" name="username" placeholder="用户名" /><br />
-			<input type="password" class="span2" name="password" placeholder="密码" /><br />
+			用户名<input type="text" class="span2" name="username" placeholder="用户名" /><br />
+			密&nbsp;&nbsp;&nbsp;&nbsp;码<input type="password" class="span2" name="password" placeholder="密码" /><br />
+			验证码<input type="text" class="span2" name="code" id="ccc" placeholder="验证码" /><img id="ci" src="{% url 'myadmin_verifycode'%}" onclick="this.src='{% url 'myadmin_verifycode' %}?id='+Math.random() "/>
+			
 			<label class="checkbox"> <input type="checkbox" /> Remember me </label>
 			<button type="submit" class="btn btn-primary">登录</button>
 			<button type="submit" class="btn">Forgot Password</button>
