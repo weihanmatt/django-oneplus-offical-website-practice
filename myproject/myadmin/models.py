@@ -17,10 +17,16 @@ class Goods(models.Model):
 	goods = models.CharField(max_length=32)
 	company = models.CharField(max_length=50)
 	descr = models.TextField(max_length=500)
-	price = models.FloatField(max_length=6)
+	price = models.DecimalField(max_digits=6, decimal_places=2)
 	picname = models.CharField(max_length=255)
 	status = models.IntegerField(max_length=1)
 	store = models.IntegerField(max_length=11)
 	num = models.IntegerField(max_length=11)
-	clicknum = models.IntegerField(max_length=0)
-	addtime = models.IntegerField(max_length=0)
+	clicknum = models.IntegerField(max_length=11)
+	addtime = models.IntegerField(max_length=20)
+
+#商品类别信息模型
+class Types(models.Model):
+    name = models.CharField(max_length=32)
+    pid = models.IntegerField(default=0)
+    path = models.CharField(max_length=255)

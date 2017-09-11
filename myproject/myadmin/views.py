@@ -178,6 +178,21 @@ def edituser(request,uid):
 	return render(request,"myadmin/edituser.html",context)
 
 
+#浏览商品
+def browsegoods(request,pIndex):
+	list = Users.objects.all()
+	p = Paginator(list,5)
+	# 处理当前页号信息
+	if pIndex=="":
+		pIndex = '1'
+	pIndex = int(pIndex)
+	# 获取当前页数据
+	list2 = p.page(pIndex)
+	plist = p.page_range
+	return render(request,"myadmin/browsegoods.html",{'userlist':list2,'pIndex':pIndex,'plist':plist})
+
+
+
 
 
 

@@ -58,7 +58,7 @@
 									{{goods.typeid}}
 								</td>
 								<td>
-									{{goods.name}}
+									{{goods.goods}}
 								</td>
 								<td>
 									{{goods.company}}
@@ -85,8 +85,8 @@
 									{{goods.descr}}
 								</td>
 								<td>
-									<a href="{% url 'myadmin_edituser' user.id %}">编辑</a>	
-									<a href="javascript:doDel('{% url 'myadmin_deleteuser' user.id %}');">删除</a>
+									<a href="{% url 'myadmin_editgoods' goods.id %}">编辑</a>	
+									<a href="javascript:doDel('{% url 'myadmin_deletegoods' goods.id %}');">删除</a>
 								</td>
 							</tr>
 						{% endfor %}
@@ -95,7 +95,7 @@
 					<div class="pagination">
 					{%for pindex in plist%}
 						<ul>
-							<li><a href={% url 'myadmin_browseuser' pindex %}>{{pindex}}</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+							<li><a href={% url 'myadmin_browsegoods' pindex %}>{{pindex}}</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
 						</ul>
 					{% endfor %}
 					</div>
