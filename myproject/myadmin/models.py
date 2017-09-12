@@ -16,13 +16,13 @@ class Goods(models.Model):
 	typeid = models.IntegerField(max_length=11)
 	goods = models.CharField(max_length=32)
 	company = models.CharField(max_length=50)
-	descr = models.TextField(max_length=500)
+	descr = models.TextField()
 	price = models.DecimalField(max_digits=6, decimal_places=2)
 	picname = models.CharField(max_length=255)
-	status = models.IntegerField(max_length=1)
-	store = models.IntegerField(max_length=11)
-	num = models.IntegerField(max_length=11)
-	clicknum = models.IntegerField(max_length=11)
+	status = models.IntegerField(default=1)
+	store = models.IntegerField(default=0)
+	num = models.IntegerField(default=0)
+	clicknum = models.IntegerField(default=0)
 	addtime = models.IntegerField(max_length=20)
 
 #商品类别信息模型

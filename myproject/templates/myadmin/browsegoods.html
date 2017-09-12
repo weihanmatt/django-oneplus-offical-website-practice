@@ -14,7 +14,7 @@
 									ID
 								</th>
 								<th>
-									类别ID
+									商品类别
 								</th>
 								<th>
 									商品名称
@@ -26,7 +26,7 @@
 									价格
 								</th>
 								<th>
-									图片名称
+									图片
 								</th>
 								<th>
 									数量
@@ -37,12 +37,6 @@
 								<th>
 									添加时间
 								</th>
-								<th>
-									点击数
-								</th>
-								<th>
-									商品描述
-								</th>	
 								<th>
 									操作
 								</th>
@@ -67,22 +61,22 @@
 									{{goods.price}}
 								</td>
 								<td>
-									{{goods.picname}}
+									<img src="/static/goods/s_{{ goods.picname }}" alt="">
 								</td>
 								<td>
 									{{goods.num}}
 								</td>
 								<td>
-									{{goods.status}}
+									{% if goods.status == 1 %}
+										新添加
+									{% elif goods.stauts == 2%}
+										在售
+									{% else %}
+										下架
+									{% endif %}	
 								</td>
 								<td>
 									{{goods.addtime|dealwithtime}}
-								</td>
-								<td>
-									{{goods.clicknum}}
-								</td>
-								<td>
-									{{goods.descr}}
 								</td>
 								<td>
 									<a href="{% url 'myadmin_editgoods' goods.id %}">编辑</a>	

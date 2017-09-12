@@ -1,9 +1,11 @@
 from django.shortcuts import render
+from django.http import HttpResponse
 from myadmin.models import Users
 from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from myadmin.models import Goods,Types
+from PIL import Image
 import time
 import os
 
@@ -20,19 +22,47 @@ def browsegoods(request,pIndex):
 	plist = p.page_range
 	return render(request,"myadmin/browsegoods.html",{'goodslist':list2,'pIndex':pIndex,'plist':plist})
 
+
 #添加商品路由
 def addgoods(request):
-	return render(request,"myadmin/addgoods.html")
+	list = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has')
+	context = {"typelist":list}
+	return render(request,"myadmin/addgoods.html",context)
 
 #添加商品
 def insertgoods(request): 
 	try:
+		#判断执行图片上传
+		myfile = request.FILES.get('picname',None)
+		if not myfile:
+			return HttpResponse('没有上传图片信息')
+		#时间戳命名图片
+		filename = str(time.time())+'.'+myfile.name.split('.').pop()
+		destination = open(os.path.join('./static/goods/',filename),'wb+')
+		for chunk in myfile.chunks():
+			destination.write(chunk)
+		destination.close()
+		#图片缩放
+		im = Image.open('./static/goods/'+filename)
+
+		im.thumbnail((375,375))
+
+		im.save('./static/goods/'+filename,'jpeg')
+
+		im.thumbnail((220,220))
+
+		im.save('./static/goods/m_'+filename,'jpeg')
+
+		im.thumbnail((100,100))
+
+		im.save('./static/goods/s_'+filename,'jpeg')
+
 		ob = Goods()
 		ob.typeid = request.POST['typeid']
 		ob.goods = request.POST['goods']
 		ob.company = request.POST['company']
 		ob.price = request.POST['price']
-		ob.picname = request.POST['picname']
+		ob.picname = filename
 		ob.num = request.POST['num']
 		ob.clicknum = request.POST['clicknum']
 		ob.descr = request.POST['descr']
@@ -45,7 +75,7 @@ def insertgoods(request):
 	    context = {'info':'添加失败！'}
 	return render(request,"myadmin/info.html",context)
 
-#删除用户
+#删除商品
 def deletegoods(request,uid):
 	try:
 		ob = Goods.objects.get(id=uid)
@@ -133,13 +163,13 @@ def deltype(request,tid):
 
 # 打开商品类别信息编辑表单
 def edittype(request,tid):
-    try:
-        ob = Types.objects.get(id=tid)
-        context = {'type':ob}
-        return render(request,"myadmin/edittype.html",context)
-    except:
-        context = {'info':'没有找到要修改的信息！'}
-    return render(request,"myadmin/info.html",context)
+	try:
+		ob = Types.objects.get(id=tid)
+		context = {'type':ob}
+		return render(request,"myadmin/edittype.html",context)
+	except:
+		context = {'info':'没有找到要修改的信息！'}
+	return render(request,"myadmin/info.html",context)
 
 # 执行商品类别信息编辑
 def updatetype(request,tid):

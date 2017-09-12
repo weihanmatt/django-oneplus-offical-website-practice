@@ -1,10 +1,11 @@
 {% extends "myadmin/base.html" %}
 
-{% block mainbody %}				
+{% block block_name %}	
+<div class="span9">					
 	<h3>
 		商品类别信息管理
 	</h3>
-	<form id="edit-profile" action="{% url 'myadmin_typeupdate' user.id %}" class="form-horizontal" method="post">
+	<form id="edit-profile" action="{% url 'myadmin_updatetype' type.id %}" class="form-horizontal" method="post">
 		{% csrf_token %}
 		<fieldset>
 			<legend>编辑商品类别信息</legend>
@@ -25,4 +26,5 @@
 			</div>
 		</fieldset>
 	</form>
+</div>
 {% endblock %}

@@ -6,7 +6,7 @@
 					<h1>
 						添加商品
 					</h1>
-					<form action="{% url 'myadmin_insertgoods' %}" method="post" class="form-horizontal">
+					<form action="{% url 'myadmin_insertgoods' %}" method="post" class="form-horizontal" enctype="multipart/form-data">
 					{% csrf_token %}
 						<fieldset>
 							<legend>用户信息</legend>
@@ -17,9 +17,18 @@
 								</div>
 							</div>
 							<div class="control-group">
-								<label class="control-label" for="input01">商品类别ID</label>
+								<label class="control-label" for="input01">商品类别</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="typeid" />
+									<select name="typeid">
+										{% for vo in typelist %}
+											<option 
+											{% if vo.pid == 0 %}
+											disabled 
+											{% endif %} 
+											value="{{vo.id}}">{{vo.name}}</option>
+										{% endfor %}
+
+									</select>
 								</div>
 							</div>
 							<div class="control-group">
@@ -37,7 +46,7 @@
 							<div class="control-group">
 								<label class="control-label" for="input01">图片名称</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="picname" />
+									<input type="file" class="input-xlarge" id="input01" name="picname" />
 								</div>
 							</div>
 							<div class="control-group">
