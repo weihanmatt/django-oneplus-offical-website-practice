@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'myadmin.adminmiddleware.AdminMiddleware',
+    'myweb.mywebmiddleware.MywebMiddleware',
 ]
 
 ROOT_URLCONF = 'myproject.urls'

@@ -66,7 +66,7 @@ $('.yyhxz ul li').mouseover(function(){
 $('.yyhxz ul li').click(function(){
 	var a = $(this).val();
 	$(this).css('color','black').siblings().css('color')
-	console.log(a)
+	// console.log(a)
 	if (a == 1) {
 		$('.yueyanhui').css('background','#DADCE2')
 		$('.yyhimg img').attr('src','./static/myweb/images/gray-phone.png')
@@ -93,7 +93,7 @@ $('.yyhxz ul li').click(function(){
 //详情页导航栏2固定
 $(window).scroll(function(){
 	var dh2 = $(window).scrollTop();
-	console.log(dh2)
+	// console.log(dh2)
 	if (dh2>110) {
 		$('.daohang2 .navbar').addClass('navbar-fixed-top')
 		$('.dh2mobile, .bukenenga').addClass('navbar-fixed-top')
@@ -181,6 +181,7 @@ $('.bukeneng li').mouseout(function(){
 //声明全局变量
 	var NameOk = false;
 	var PassOk = false;
+	var Pass2Ok = false;
 	var EmailOk = false;
 
 	//获取焦点事件 focus
@@ -193,6 +194,7 @@ $('.bukeneng li').mouseout(function(){
 
 	//用户名验证
 	$('input[name=username]').blur(function(){
+		console.log(321)
 		//获取用户的输入信息
 		var v = $(this).val();
 		var reg = /^\w{6,18}$/;
@@ -201,6 +203,7 @@ $('.bukeneng li').mouseout(function(){
 			$(this).css('border','1px solid green');
 			//修改全局变量
 			NameOk = true;
+			console.log(312)
 		}else{
 			// $(this).next('span').html('用户名格式不正确').css('color','red');
 			$(this).css('border','1px solid red');
@@ -208,14 +211,14 @@ $('.bukeneng li').mouseout(function(){
 			NameOk = false;
 		}
 	})
-
 	//密码验证
 	$('input[name=password]').blur(function(){
 		//获取用户的输入信息
-		var v = $(this).val();
-		console.log(v)
+		 var v = $(this).val();
+		// console.log(v)
 		var reg = /^\w{6,18}$/;
 		if(reg.test(v)){
+			console.log(1111)
 			// $(this).next('span').html('√').css('color','green');
 			$(this).css('border','1px solid green');
 			//修改全局变量
@@ -228,38 +231,59 @@ $('.bukeneng li').mouseout(function(){
 		}
 	})
 
-	
-		//邮箱验证
-	$('input[name=email]').blur(function(){
+	$('input[name=password2]').blur(function(){
 		//获取用户的输入信息
-		var v = $(this).val();
-		var reg = /^\w+@\w+\.(com|cn|org|net)$/;
-		if(reg.test(v)){
-			$(this).next('span').html('√').css('color','green');
+		var v2 = $(this).val();
+		// console.log(v)
+		var reg = /^\w{6,18}$/;
+		if(reg.test(v2)){
+			// $(this).next('span').html('√').css('color','green');
 			$(this).css('border','1px solid green');
 			//修改全局变量
-			EmailOk = true;
+			Pass2Ok = true;
 		}else{
-			$(this).next('span').html('邮箱格式不正确').css('color','red');
+			// $(this).next('span').html('密码格式不正确').css('color','red');
 			$(this).css('border','1px solid red');
-			//修改全局变量
-			EmailOk = false;
+				//修改全局变量
+			Pass2Ok = false;
 		}
 	})
 
 	
+	// 	//邮箱验证
+	// $('input[name=email]').blur(function(){
+	// 	//获取用户的输入信息
+	// 	var v = $(this).val();
+	// 	var reg = /^\w+@\w+\.(com|cn|org|net)$/;
+	// 	if(reg.test(v)){
+	// 		$(this).next('span').html('√').css('color','green');
+	// 		$(this).css('border','1px solid green');
+	// 		//修改全局变量
+	// 		EmailOk = true;
+	// 	}else{
+	// 		$(this).next('span').html('邮箱格式不正确').css('color','red');
+	// 		$(this).css('border','1px solid red');
+	// 		//修改全局变量
+	// 		EmailOk = false;
+	// 	}
+	// })
 
-	//提交验证
+	
+
+	// 提交验证
 	$('form').submit(function(){
+		console.log(NameOk,PassOk)
 		//触发input 丧失焦点事件
-		$('input').trigger('blur');
+		// $('input').trigger('blur');
 
 		//判断如果都正确
-		if(NameOk && PassOk && EmailOk){
+		if(NameOk && PassOk ){
 			return true;
+			console.log('zhen')
 		}
 		//阻止默认行为
 		return false;
+		console.log('jia')
 	})
 
 

@@ -13,7 +13,9 @@
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static "myweb/js/bootstrap.min.js" %}"></script></head>
     <script type="text/javascript" src="{% static "myweb/js/rem.js" %}"></script>
+    <script type="text/javascript" src="{% static "myweb/js/Calculation.js" %}"></script>
     <link rel="stylesheet" type="text/css" href="{% static "myweb/css/oneplus.css" %}">
+    <link href="{% static "myweb/css/index.css"%}" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="{% static "myweb/images/oneplus.ico" %}">
     
 <body>
@@ -31,15 +33,19 @@
 				        <span class="icon-bar"></span>
 				        <span class="icon-bar"></span>
 				      </button>
-				      <a class="logolyc" href="./oneplus.html"><img src="{% static "myweb/images/logo.png" %}"></a>
+				      <a class="logolyc" href="{% url 'index' %}"><img src="{% static "myweb/images/logo.png" %}"></a>
 
 				    </div>
 				    
 				    <div id="aa" class="clearfix " >
 				    	<ul class="nav navbar-nav pdd2 pdd "> 
+				    		
+
 				            <li value="1"><a href="#"><img id="dss" src="{% static "myweb/images/fdb.png" %}"> </a></li> 
-				            <li value="2"><a href="./shopchart.html"><img id="dgwc" src="{% static "myweb/images/shopw.png" %}"> </a></li> 
-				           	<li value="3"><a href="{% url 'login' %}"><img id="dp" src="{% static "myweb/images/icon_person.png" %}"> </a></li> 
+				            <li value="2"><a href="{% url 'shopchart' %}"><img id="dgwc" src="{% static "myweb/images/shopw.png" %}"> </a></li> 
+				            <li><a href="{% url 'login' %}">{{vip}}</a></li>
+				    		<li><a href="{% url 'logout' %}">{{haha}}</a></li>
+				           	<!-- <li value="3"><a href="{% url 'login' %}"><img id="dp" src="{% static "myweb/images/icon_person.png" %}"> </a></li> -->
 				            
 				        </ul>
 				    </div>
@@ -226,5 +232,5 @@
 	</div>
 </div>
 </body>
-<script type="text/javascript" src="{% static "myweb/js/oneplus.js" %}"></script>
+<script type="text/javascript" src="{% static 'myweb/js/oneplus.js' %}"></script>
 </html>

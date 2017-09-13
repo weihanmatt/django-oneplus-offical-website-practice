@@ -19,6 +19,9 @@ def browsegoods(request,pIndex):
 	pIndex = int(pIndex)
 	# 获取当前页数据
 	list2 = p.page(pIndex)
+	for i in list2:
+		ob = Types.objects.get(id=i.typeid)
+		i.typename = ob.name
 	plist = p.page_range
 	return render(request,"myadmin/browsegoods.html",{'goodslist':list2,'pIndex':pIndex,'plist':plist})
 
@@ -78,37 +81,87 @@ def insertgoods(request):
 #删除商品
 def deletegoods(request,uid):
 	try:
+		# 获取被删除商品信的息量，先删除对应的图片
 		ob = Goods.objects.get(id=uid)
+		#执行图片删除
+		os.remove("./static/goods/"+ob.picname)   
+		os.remove("./static/goods/m_"+ob.picname)   
+		os.remove("./static/goods/s_"+ob.picname)
+		#执行商品信息的删除 
 		ob.delete()
 		context = {'info':'删除成功！'}
 	except:
-	    context = {'info':'删除失败！'}
+		context = {'info':'删除失败！'}
 	return render(request,"myadmin/info.html",context)
 
 #加载编辑商品信息
 def editgoods(request,uid):
+	# try:
+	# 获取要编辑的信息
 	ob = Goods.objects.get(id=uid)
-	context = {'goods':ob}
+	# 获取商品的类别信息
+	list = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has')
+	# 放置信息加载模板
+	context = {"typelist":list,'goods':ob}
 	return render(request,"myadmin/editgoods.html",context)
+	# except:
+	# 	context = {'info':'没有找到要修改的信息！'}
+	# return render(request,"myadmin/info.html",context)
 
 # 执行商品编辑操作
 def updategoods(request,uid):
 	try:
-		ob.typeid = request.POST['typeid']
+		b = False
+		oldpicname = request.POST['oldpicname']
+		if None != request.FILES.get("pic"):
+			myfile = request.FILES.get("pic", None)
+			if not myfile:
+				return HttpResponse("没有上传文件信息！")
+	        # 以时间戳命名一个新图片名称
+			filename = str(time.time())+"."+myfile.name.split('.').pop()
+			destination = open(os.path.join("./static/goods/",filename),'wb+')
+			for chunk in myfile.chunks():      # 分块写入文件  
+				destination.write(chunk)  
+			destination.close()
+	        # 执行图片缩放
+			im = Image.open("./static/goods/"+filename)
+	        # 缩放到375*375:
+			im.thumbnail((375, 375))
+	        # 把缩放后的图像用jpeg格式保存:
+			im.save("./static/goods/"+filename, 'jpeg')
+	        # 缩放到220*220:
+			im.thumbnail((220, 220))
+			# 把缩放后的图像用jpeg格式保存:
+			im.save("./static/goods/m_"+filename, 'jpeg')
+			# 缩放到220*220:
+			im.thumbnail((100, 100))
+			# 把缩放后的图像用jpeg格式保存:
+			im.save("./static/goods/s_"+filename, 'jpeg')
+			b = True
+			picname = filename
+		else:
+			picname = oldpicname
+		ob = Goods.objects.get(id=uid)
 		ob.goods = request.POST['goods']
+		ob.typeid = request.POST['typeid']
 		ob.company = request.POST['company']
 		ob.price = request.POST['price']
-		ob.picname = request.POST['picname']
-		ob.num = request.POST['num']
-		ob.clicknum = request.POST['clicknum']
-		ob.descr = request.POST['descr']
 		ob.store = request.POST['store']
+		ob.descr = request.POST['descr']
+		ob.picname = picname
 		ob.status = request.POST['status']
-		ob.addtime = time.time()
 		ob.save()
-		context = {'info':'添加成功！'}
+		context = {'info':'修改成功！'}
+		if b:
+			os.remove("./static/goods/m_"+oldpicname) #执行老图片删除  
+			os.remove("./static/goods/s_"+oldpicname) #执行老图片删除  
+			os.remove("./static/goods/"+oldpicname) #执行老图片删除  
 	except:
-	    context = {'info':'修改失败！'}
+		context = {'info':'修改失败！'}
+		if b:
+			os.remove("./static/goods/m_"+picname) #执行新图片删除  
+			os.remove("./static/goods/s_"+picname) #执行新图片删除  
+			os.remove("./static/goods/"+picname) #执行新图片删除  
 	return render(request,"myadmin/info.html",context)
 
 # ==============后台商品类别信息管理======================

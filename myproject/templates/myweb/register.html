@@ -9,7 +9,8 @@
         <div class="col-md-12 column login1">
             <div class="login2 center-block clearfix">
                 <div class="login3 center-block clearfix">
-                    <form action="">
+                    <form action="{% url 'registuser' %}" method="post" class="#checkpassword">
+                    {% csrf_token %}
                         <div class="otherlogin">选择其他方式登录</div>
                         <div class="loginhead clearfix">注 册</div>
                         <div class="qqlogin">
@@ -17,7 +18,7 @@
                         </div>
                         
                         <div class="loginname">
-                            <input name="email" type="text" class="form-control" id="name" placeholder="请输入邮箱">
+                            <input name="username" type="text" class="form-control" id="name" placeholder="请输入邮箱">
                         </div>
                         <div class="wblogin">
                             <a href=""><img src="{% static "myweb/images/wblogin.png" %}" width="100%" alt=""></a>
@@ -26,11 +27,11 @@
                             <input name="password" type="password" class="form-control" id="name" placeholder="密码6~16位,数字/字母/字符至少两种">
                         </div>
                         <div class="loginname">
-                            <input name="password" type="password" class="form-control" id="name" placeholder="确认密码">
+                            <input name="password2" type="password" class="form-control" id="name" placeholder="确认密码">
                         </div>
-                        <div class="zhucewbl"><a>注册一加，即表示您同意一加的 用户协议</a></div>
+                        <div class="zhucewbl"><a>{{info}}</a></div>
                         <div class="tijiao">
-                            <button>注册</button>
+                            <button type="submit">注册</button>
                         </div>
                         <div class="youdenglu"><a href="{% url 'login' %}">登录▶</a></div>
                     </form>

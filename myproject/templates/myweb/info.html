@@ -1,0 +1,20 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+
+{%block block_name%}
+<!-- 注册页 -->
+
+<!-- 注册框 pc端-->
+    <div class="row clearfix login">
+        <div class="col-md-12 column login1">
+            <div class="login2 center-block clearfix">
+                <div class="login3 center-block clearfix">
+                    <center>
+                        <h1>{{info}}</h1>
+                        <a href="{% url 'login' %}">去登录</a>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+{%endblock%}

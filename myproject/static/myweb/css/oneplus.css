@@ -2,6 +2,9 @@ div,body,img,h1,nav,h2{
 	margin: 0;
 	padding: 0;
 }
+a{
+	text-decoration: none;
+}
 body{
 	position: absolute;
 	top: 0;
@@ -12,16 +15,16 @@ body{
 }
 @font-face {
     font-family: 'lato';
-    src: url('./Lato-Regular.woff');
+    src: url('../fonts/Lato-Regular.woff');
 
 }
 @font-face {
     font-family: 'latol';
-    src: url('./lato-light.woff');
+    src: url('../fonts/lato-light.woff');
 }
 @font-face {
     font-family: 'minghei';
-    src: url('./MYingHeiPRC-W3.woff');
+    src: url('../fonts/MYingHeiPRC-W3.woff');
 }
 /*导航栏*/
 .pdd{
@@ -442,6 +445,10 @@ body{
 	height: 100px;
 	background-color: #F6F6F6;
 	float: left;
+}
+.bukeneng a{
+	text-decoration: none;
+	color: #5D5D5D;
 }
 @media (min-width:990px){
     .bukenenga{

@@ -2,81 +2,87 @@
 {% load static from staticfiles %}
 
 {%block block_name%}
-				<div class="span9">
-					<h1>
-						编辑商品信息
-					</h1>
-					<form action="{% url 'myadmin_updategoods' goods.id %}" method="post" class="form-horizontal">
-					{% csrf_token %}
-						<fieldset>
-							<legend>用户信息</legend>
-							<div class="control-group">
-								<label class="control-label" for="input01">商品名称</label>
-								<div class="controls">
-									<input type="text" readonly="readonly" class="input-xlarge" id="input01" name="username" value="{{goods.goods}}" />
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">商品类别ID	ID</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="name" value="{{goods.typeid}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">生产厂商</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="password" value="{{goods.company}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">价格</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="sex" value="{{goods.price}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">图片名称</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="code" value="{{goods.picname}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">商品描述</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="phone" value="{{goods.descr}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">数量</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="email" value="{{goods.num}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">点击数</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="email" value="{{goods.clicknum}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">库存</label>
-								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="email" value="{{goods.store}}"/>
-								</div>
-							</div>
-							<div class="control-group">
-								<label class="control-label" for="input01">状态</label>
-								<div class="controls">
-									<input type="radio" class="input-xlarge" id="input01" value="1" name="status" />新添加
-									<input type="radio" class="input-xlarge" id="input01" value="2" name="status" />在售
-									<input type="radio" class="input-xlarge" id="input01" value="3" name="status" />已下架
-								</div>
-							</div>			
-							<div class="form-actions">
-								<button type="submit" class="btn btn-primary">Save</button> <button class="btn">Cancel</button>
-							</div>
-						</fieldset>
-					</form>
+<div class="span9">
+					<h3>
+		商品信息管理
+	</h3>
+	<form id="edit-profile" action="{% url 'myadmin_updategoods' goods.id %}" class="form-horizontal" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<input type="hidden" name="oldpicname" value="{{ goods.picname }}"/>
+		<fieldset>
+			<legend>编辑商品信息</legend>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品类别：</label>
+				<div class="controls">
+					<select name="typeid">
+						{% for vo in typelist %}
+							<option value="{{ vo.id }}">{{ vo.name }}</option>
+						{% endfor %}
+					</select>
 				</div>
 			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品名称：</label>
+				<div class="controls">
+					<input type="text" name="goods" value="{{ goods.goods }}" class="input-xlarge" id="input01"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">生产厂家：</label>
+				<div class="controls">
+					<input type="text" name="company" value="{{ goods.company }}" class="input-xlarge" id="input01"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">单价：</label>
+				<div class="controls">
+					<input type="text" name="price" value="{{ goods.price }}" class="input-xlarge" id="input01"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">库存量：</label>
+				<div class="controls">
+					<input type="text" name="store" value="{{ goods.store }}" class="input-xlarge" id="input01"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">商品图片：</label>
+				<div class="controls">
+					<input type="file" name="pic" class="input-xlarge" id="input01"/>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="input01">状态：</label>
+				<div class="controls">
+					<input type="radio" name="status" class="input-xlarge" id="input01" 
+					{% if goods.status == 1 %}
+						checked  
+					{% endif %}
+					value="1" /> 新商品 
+					<input type="radio" name="status" class="input-xlarge" id="input01" 
+					{% if goods.status == 2 %}
+						checked  
+					{% endif %}
+					value="2" /> 在售
+					<input type="radio" name="status" class="input-xlarge" id="input01" 
+					{% if goods.status == 3 %}
+						checked  
+					{% endif %}
+					value="3" /> 已下架
+				</div>
+			</div>	
+			<div class="control-group">
+				<label class="control-label" for="input01">商品简介：</label>
+				<div class="controls">
+					<textarea cols="40" style="width:450px" rows="10" name="descr">{{ goods.descr }}</textarea>
+				</div>
+			</div>						
+			<div class="form-actions">
+				<button type="submit" class="btn btn-primary">保存</button> <button type="reset" class="btn">重置</button>
+			</div>
+		</fieldset>
+	</form>
+	<br/>
+	<img src="/static/goods/m_{{ goods.picname }}"/>
+</div>
 {% endblock %}

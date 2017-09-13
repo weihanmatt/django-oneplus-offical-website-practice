@@ -7,7 +7,8 @@
         <div class="col-md-12 column login1">
             <div class="login2 center-block clearfix">
                 <div class="login3 center-block clearfix">
-                    <form action="">
+                    <form id="userlogin" action="{% url 'dologin' %}" method="post">
+                    {% csrf_token %}
                         <div class="otherlogin">选择其他方式登录</div>
                         <div class="loginhead clearfix">登 录</div>
                         <div class="qqlogin">
@@ -23,9 +24,13 @@
                         <div class="loginname">
                             <input name="password" type="password" class="form-control" id="name" placeholder="密码">
                         </div>
-                        <div class="forgetpw"><a>忘记密码</a></div>
+                        <div class="loginname">
+                            <input style="width:150px;height:30px;margin-right:10px;border:none;" type="text" class="span2" name="code2" id="ccc" placeholder="  验证码" /><span><img id="ci" src="{% url 'myweb_verifycode'%}" onclick="this.src='{% url 'myweb_verifycode' %}?id='+Math.random() "/></span>
+                        </div>
+                        <span style="color:red;margin-left:120px;">{{info}}</span>
+{#                         <div class="forgetpw"><a>忘记密码</a></div> #}
                         <div class="tijiao">
-                            <button>确认</button>
+                            <button type="submit">确认</button>
                         </div>
                         <div class="myzc"><span>没有一加账户?</span><a href="{% url 'register' %}">立即注册</a></div>
                     </form>
@@ -38,18 +43,22 @@
         <div class="col-xs-12">
             <div class="loginM clearfix">
                 <div class="erzi">
-                    <form action="">
+                    <form id="userlogin" action="{% url 'dologin' %}" method="post">
+                    {% csrf_token %}
                         <div class="denglu">登录</div>
                         <div class="loginnameM"><input name="username" type="text" class="form-control" id="name" placeholder="手机,邮箱或用户名"></div>
                         <div class="loginpasswordM"><input name="password" type="password" class="form-control" id="name" placeholder="密码"></div>
+                        <br>
+                        <div class="loginnameM" style="border:none;">
+                            <input type="text" class="span2" name="code2" id="ccc" placeholder="  验证码" /><span><img id="ci" src="{% url 'myweb_verifycode'%}" onclick="this.src='{% url 'myweb_verifycode' %}?id='+Math.random() "/></span>
+                        </div>
                         <div class="forgetM">忘记密码</div>
                         <div class="tijiaoM">
-                            <button ty>确认</button>
+                            <button type="submit">确认</button>
                         </div>
-                        <div class="signupM">没有一加账户><a href="{% url 'register' %}">立即注册</a></div>
-                        <div class="otherM">选择其他方式登陆</div>
-                        <div><img src="{% static "myweb/images/qqlogin.png" %}" alt="" width="100%"></div>
-                        <div class="wbloginM"><img src="{% static "myweb/images/wblogin.png" %}" alt="" width="100%"></div>
+                        
+                        
+                        
                     </form>
                 </div>
             </div>

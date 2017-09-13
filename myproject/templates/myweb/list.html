@@ -1,0 +1,66 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+
+{%block block_name%}
+    <!-- 导航栏2 -->
+    <div class="row clearfix bukenenga">
+        <div class="bukeneng">
+            <ul>
+                <li value="1">
+                    <div class="center-block hahaha" >
+                        <img id="a1" src="{% static "myweb/images/shoujib.png" %}" alt="" width="30px">
+                    </div>
+                    <div><a href="{% url 'list' 1 %}">手机</a></div>
+                </li>
+                <li value="2">
+                    <div class="center-block hahaha">
+                        <img id="a2" src="{% static "myweb/images/erjib.png" %}" alt="" width="30px">
+                    </div>
+                    <div><a href="{% url 'list' 2 %}">耳机/音响</a></div>
+                </li>
+                <li value="3">
+                    <div class="center-block hahaha">
+                        <img id="a3" src="{% static "myweb/images/keb.png" %}" alt="" width="30px">
+                    </div>
+                    <div><a href="{% url 'list' 3 %}">壳/后盖/膜</a></div>
+                </li>
+                <li value="4">
+                    <div class="center-block hahaha">
+                        <img id="a4" src="{% static "myweb/images/xianb.png" %}" alt="" width="30px">
+                    </div>
+                    <div><a href="{% url 'list' 4 %}">适配器/数据线</a></div>
+                </li>
+                <li value="5">
+                    <div class="center-block hahaha">
+                        <img id="a5" src="{% static "myweb/images/taozhuangb.png" %}" alt="" width="30px">
+                    </div>
+                    <div><a href="{% url 'list' 5 %}">套装</a></div>
+                </li>
+                <li value="6">
+                    <div class="center-block hahaha">
+                        <img id="a6" src="{% static "myweb/images/baob.png" %}" alt="" width="30px">
+                    </div>
+                    <div><a href="{% url 'list' 6 %}">生活馆</a></div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 商品列表 -->
+    <div class="row clearfix rexiao">
+        {% for goods in goodslist %}
+        <div class="col-md-3 column col-xs-6">
+            <div class="thumbnail tutu y1 texiao">
+                <img class="tutu" src="/static/goods/m_{{goods.picname}}" alt="...">
+                <div class="caption lmdz">
+                    <p><strong>{{goods.goods}}</strong></p>
+                    <p>￥{{goods.price}} | <del>￥237.00</del></p>
+                    
+                </div>
+            </div>
+        </div>
+        {% endfor %}       
+    </div>
+    
+    
+    <br>
+{%endblock%}
