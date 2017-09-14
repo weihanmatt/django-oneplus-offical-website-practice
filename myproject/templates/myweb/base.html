@@ -11,13 +11,15 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static "myweb/js/jquery-1.12.4.min.js" %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static "myweb/js/bootstrap.min.js" %}"></script></head>
-    <script type="text/javascript" src="{% static "myweb/js/rem.js" %}"></script>
-    <script type="text/javascript" src="{% static "myweb/js/Calculation.js" %}"></script>
+    <script src="{% static "myweb/js/bootstrap.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "myweb/js/rem.js" %}"></script>    
     <link rel="stylesheet" type="text/css" href="{% static "myweb/css/oneplus.css" %}">
-    <link href="{% static "myweb/css/index.css"%}" rel="stylesheet" type="text/css" />
+    {# <link href="{% static "myweb/css/index.css"%}" rel="stylesheet" type="text/css" /> #}
     <link rel="shortcut icon" href="{% static "myweb/images/oneplus.ico" %}">
-    
+    {%block head%}
+
+	{%endblock%}
+</head>
 <body>
 	<div class=".container-fluid">
 	<!-- 导航栏 -->
@@ -42,7 +44,7 @@
 				    		
 
 				            <li value="1"><a href="#"><img id="dss" src="{% static "myweb/images/fdb.png" %}"> </a></li> 
-				            <li value="2"><a href="{% url 'shopchart' %}"><img id="dgwc" src="{% static "myweb/images/shopw.png" %}"> </a></li> 
+				            <li value="2"><a href="{% url 'shopchart' %}"><img id="dgwc" src="{% static "myweb/images/shopw.png" %}"> <span>{{request.session.shoplist|length}}</span></a></li> 
 				            <li><a href="{% url 'login' %}">{{vip}}</a></li>
 				    		<li><a href="{% url 'logout' %}">{{haha}}</a></li>
 				           	<!-- <li value="3"><a href="{% url 'login' %}"><img id="dp" src="{% static "myweb/images/icon_person.png" %}"> </a></li> -->
@@ -218,7 +220,7 @@
 		</nav>
 	</div>
 	<!-- 最后的footer -->
-	<div class="lastfooter">
+	<div class="lastfooter clearfix">
 		<div>
 			<span>© 2013-2017 All Rights Reserved. (粤ICP备130号-1)</span><img src="{% static "myweb/images/cnnic.png" %}" alt="">
 					<div class="flag">
@@ -233,4 +235,5 @@
 </div>
 </body>
 <script type="text/javascript" src="{% static 'myweb/js/oneplus.js' %}"></script>
+<script src="{% static "myweb/js/common.js" %}" type="text/javascript" charset="utf-8"></script>
 </html>

@@ -16,7 +16,11 @@
 				<div class="controls">
 					<select name="typeid">
 						{% for vo in typelist %}
-							<option value="{{ vo.id }}">{{ vo.name }}</option>
+							<option 
+							{% if vo.id == goods.typeid %}
+									selected 
+								{% endif %}
+							value="{{ vo.id }}">{{ vo.name }}</option>
 						{% endfor %}
 					</select>
 				</div>

@@ -46,18 +46,23 @@
         </div>
     </div>
     <!-- 商品列表 -->
+    <div>
+        <img src="{% static "myweb/images/zhizuozhenqijian.jpg" %}" width="100%" alt="">
+    </div>
     <div class="row clearfix rexiao">
         {% for goods in goodslist %}
-        <div class="col-md-3 column col-xs-6">
-            <div class="thumbnail tutu y1 texiao">
-                <img class="tutu" src="/static/goods/m_{{goods.picname}}" alt="...">
-                <div class="caption lmdz">
-                    <p><strong>{{goods.goods}}</strong></p>
-                    <p>￥{{goods.price}} | <del>￥237.00</del></p>
-                    
+        <a href="{% url 'details' goods.id %}">
+            <div class="col-md-3 column col-xs-6">
+                <div class="thumbnail tutu y1 texiao">
+                    <img class="tutu" src="/static/goods/m_{{goods.picname}}" alt="...">
+                    <div class="caption lmdz">
+                        <p><strong>{{goods.goods}}</strong></p>
+                        <p>￥{{goods.price}}</p>
+                        
+                    </div>
                 </div>
             </div>
-        </div>
+        </a>
         {% endfor %}       
     </div>
     

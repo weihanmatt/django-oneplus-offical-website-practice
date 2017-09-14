@@ -45,6 +45,13 @@ def oneplus5(request):
 	context = loadlogin(request)
 	return render(request,"myweb/oneplus-main.html",context)
 
+#商品详情页2
+def details(request,gid):
+	context = loadContext(request)
+	context['goods'] = Goods.objects.get(id=gid)
+	return render(request,"myweb/details.html",context)
+
+
 #会员登录页
 def login(request):
 	context = loadlogin(request)
@@ -128,6 +135,7 @@ def verifycode(request):
 def logout(request):
     # 清除登录的session信息
     del request.session['mywebuser']
+    request.session['shoplist'] = {}
     # 跳转登录页面
     return redirect(reverse('login'))
 
@@ -176,6 +184,3 @@ def registuser(request):
 		context = {'info':'两次密码不一致'}
 		return render(request,"myweb/register.html",context)
 
-#购物车
-def shopchart(request):
-	return render(request,"myweb/shopchart.html")

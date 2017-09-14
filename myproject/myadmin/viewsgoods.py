@@ -50,15 +50,15 @@ def insertgoods(request):
 
 		im.thumbnail((375,375))
 
-		im.save('./static/goods/'+filename,'jpeg')
+		im.save('./static/goods/'+filename,None)
 
 		im.thumbnail((220,220))
 
-		im.save('./static/goods/m_'+filename,'jpeg')
+		im.save('./static/goods/m_'+filename,None)
 
 		im.thumbnail((100,100))
 
-		im.save('./static/goods/s_'+filename,'jpeg')
+		im.save('./static/goods/s_'+filename,None)
 
 		ob = Goods()
 		ob.typeid = request.POST['typeid']
@@ -128,15 +128,15 @@ def updategoods(request,uid):
 	        # 缩放到375*375:
 			im.thumbnail((375, 375))
 	        # 把缩放后的图像用jpeg格式保存:
-			im.save("./static/goods/"+filename, 'jpeg')
+			im.save("./static/goods/"+filename, None)
 	        # 缩放到220*220:
 			im.thumbnail((220, 220))
 			# 把缩放后的图像用jpeg格式保存:
-			im.save("./static/goods/m_"+filename, 'jpeg')
+			im.save("./static/goods/m_"+filename, None)
 			# 缩放到220*220:
 			im.thumbnail((100, 100))
 			# 把缩放后的图像用jpeg格式保存:
-			im.save("./static/goods/s_"+filename, 'jpeg')
+			im.save("./static/goods/s_"+filename, None)
 			b = True
 			picname = filename
 		else:
