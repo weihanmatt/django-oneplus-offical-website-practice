@@ -16,74 +16,126 @@
     <link rel="stylesheet" type="text/css" href="{% static "myweb/css/oneplus.css" %}">
     {# <link href="{% static "myweb/css/index.css"%}" rel="stylesheet" type="text/css" /> #}
     <link rel="shortcut icon" href="{% static "myweb/images/oneplus.ico" %}">
-    {%block head%}
+	<meta charset="utf-8">
+	<title>Dashboard - Akira</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="{% static 'myadmin/css/bootstrap.min.css' %} " rel="stylesheet">
+	<link href="{% static 'myadmin/css/bootstrap-responsive.min.css' %}" rel="stylesheet">
+	<link href="{% static 'myadmin/css/site.css' %}" rel="stylesheet">
+	</head>
+	<body>
+		<div class=".container-fluid">
+		<!-- 导航栏 -->
+	    <div class="row clearfix ">
+	        <div class="col-md-12 column">
+	        	<nav class="navbar navbar-default bgg">
+				    <div class="container-fluid">
+				    <!-- 缩小界面出现按钮 -->
+					    <div class="navbar-header pdd ">
+					      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+					        <span class="sr-only">Toggle navigation</span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					        <span class="icon-bar"></span>
+					      </button>
+					      <a class="logolyc" href="{% url 'index' %}"><img src="{% static "myweb/images/logo.png" %}"></a>
 
-	{%endblock%}
-</head>
-<body>
-	<div class=".container-fluid">
-	<!-- 导航栏 -->
-    <div class="row clearfix ">
-        <div class="col-md-12 column">
-        	<nav class="navbar navbar-default bgg">
-			    <div class="container-fluid">
-			    <!-- 缩小界面出现按钮 -->
-				    <div class="navbar-header pdd ">
-				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				        <span class="sr-only">Toggle navigation</span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				      </button>
-				      <a class="logolyc" href="{% url 'index' %}"><img src="{% static "myweb/images/logo.png" %}"></a>
+					    </div>
+					    
+					    <div id="aa" class="clearfix " >
+					    	<ul class="nav navbar-nav pdd2 pdd "> 
+					    		
 
-				    </div>
-				    
-				    <div id="aa" class="clearfix " >
-				    	<ul class="nav navbar-nav pdd2 pdd "> 
-				    		
-
-				            <li value="1"><a href="#"><img id="dss" src="{% static "myweb/images/fdb.png" %}"> </a></li> 
-				            <li value="2"><a href="{% url 'shopchart' %}"><img id="dgwc" src="{% static "myweb/images/shopw.png" %}"> <span>{{request.session.shoplist|length}}</span></a></li> 
-				            <li><a href="{% url 'personal' dbc %}">{{vip}}</a></li>
-				    		<li><a href="{% url 'logout' %}" style="cursor:default;">{{haha}}</a></li>
-				           	<!-- <li value="3"><a href="{% url 'login' %}"><img id="dp" src="{% static "myweb/images/icon_person.png" %}"> </a></li> -->
-				            
-				        </ul>
-				    </div>
-	    <!-- 列表内容-->
-	    
-			    	<div class="collapse navbar-collapse " id="bs-example-navbar-collapse-1">
-			    		<div class="center-block lyc clearfix bgg" >
-		      				<ul class="nav navbar-nav pdd pdd3">
-						        <li>
-						        	<a href="{% url 'oneplus5' %}">OnePlus 5</a>
-						        </li>
-						        <li>
-						        	<a href="{% url 'mall' %}">商城</a>
-						        </li>
-						        <li>
-						        	<a href="#">服务</a>
-						        </li>
-						        <li>
-						        	<a href="#">博客</a>
-						        </li>
-						        <li>
-						        	<a href="#">论坛</a>
-						        </li>
-				      		</ul>
-			   		    </div>
-			        </div>
-				</nav>
-        	</div>
-    	</div>
-	<!--导航结束-->
-{%block block_name%}
-
-{%endblock%}
-
-
-	<!-- footer -->
+					            <li value="1"><a href="#"><img id="dss" src="{% static "myweb/images/fdb.png" %}"> </a></li> 
+					            <li value="2"><a href="{% url 'shopchart' %}"><img id="dgwc" src="{% static "myweb/images/shopw.png" %}"> <span>{{request.session.shoplist|length}}</span></a></li> 
+					            <li><a href="{% url 'personal' dbc %}">{{vip}}</a></li>
+					    		<li><a id="logout" href="{% url 'logout' %}">{{haha}}</a></li>
+					           	<!-- <li value="3"><a href="{% url 'login' %}"><img id="dp" src="{% static "myweb/images/icon_person.png" %}"> </a></li> -->
+					            
+					        </ul>
+					    </div>
+		    <!-- 列表内容-->
+		    
+				    	<div class=" navbar-collapse " id="bs-example-navbar-collapse-1">
+				    		<div class="center-block lyc clearfix bgg" >
+			      				<ul class="nav navbar-nav pdd pdd3">
+							        <li>
+							        	<a href="{% url 'oneplus5' %}">OnePlus 5</a>
+							        </li>
+							        <li>
+							        	<a href="{% url 'mall' %}">商城</a>
+							        </li>
+							        <li>
+							        	<a href="#">服务</a>
+							        </li>
+							        <li>
+							        	<a href="#">博客</a>
+							        </li>
+							        <li>
+							        	<a href="#">论坛</a>
+							        </li>
+					      		</ul>
+				   		    </div>
+				        </div>
+					</nav>
+	        	</div>
+	    	</div>
+		<!--导航结束-->
+<div style="width:100%; height:50px; background-color:#34373C;"></div>
+	<div class="row" >
+				<div class="span3 well">
+					<div  style="padding: 8px 0;">
+						<ul class="nav nav-pills nav-stacked">
+							<li class="nav-header">
+								个人中心
+							</li>
+							<li class="nav-header">
+								<a href="{% url 'personal' request.session.webuserid %}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 个人信息</a>
+							</li>
+							<li class="nav-header">
+								<a href="{% url 'safe' %}"><span class="glyphicon glyphicon-magnet" aria-hidden="true"></span> 安全中心</a>
+							</li>
+							<li class="nav-header">
+								<a href="#"><span class="glyphicon glyphicon-flag" aria-hidden="true"></span> 地址管理</a>
+							</li>
+							<li class="nav-header">
+								订单管理
+							</li>
+							<li class="nav-header">
+								<a href="{% url 'myorders' request.session.webuserid %}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 我的订单</a>
+							</li>
+							<li class="nav-header">
+								<a href="#"><span class="glyphicon glyphicon-heart" aria-hidden="true"></span> 愿望清单</a>
+							</li>
+							<li class="nav-header">
+								<a href="#"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span> 回收站</a>
+							</li>
+							<li class="nav-header">
+								售后服务
+							</li>
+							<li class="nav-header">
+								<a href="{% url 'myorders' request.session.webuserid %}"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 在线客服</a>
+							</li>
+							<li class="nav-header">
+								<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 售后服务</a>
+							</li>
+							<li class="nav-header">
+								<a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> 用户权益</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="span9">
+					{% block content %}
+					{% endblock %}
+				</div>
+					
+        
+        <br><br>
+    </div>
+    <img src="{% static "myweb/images/zhizuozhenqijian.jpg" %}" width="100%" alt="">
+	
+<!-- footer -->
 	<!-- PC端 -->
 	<div class="row clearfix footerpc" >
 		<div class="col-md-6 column">
@@ -234,6 +286,7 @@
 	</div>
 </div>
 </body>
+
 <script type="text/javascript" src="{% static 'myweb/js/oneplus.js' %}"></script>
 <script src="{% static "myweb/js/common.js" %}" type="text/javascript" charset="utf-8"></script>
 </html>

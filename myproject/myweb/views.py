@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,JsonResponse
-from myadmin.models import Goods,Types
+from myadmin.models import Goods,Types,Order,Detail
 import time
 import hashlib
 
@@ -18,7 +18,7 @@ def loadContext(request):
 # 自定义公共登录信息
 def loadlogin(request):
 	if "mywebuser" in request.session:
-		context = {'vip':'你好'+request.session['mywebuser'],'haha':'退出'}
+		context = {'vip':request.session['mywebuser'],'haha':'退出','dbc':request.session['webuserid']}
 		
 	else:
 		context = {'vip':'请登录'}
@@ -37,7 +37,7 @@ def mall(request):
 
 def list(request,tid):
 	context = loadContext(request)
-	context['goodslist'] = Goods.objects.filter(typeid__in=Types.objects.only('id').filter(id=tid))
+	context['goodslist'] = Goods.objects.filter(typeid__in=Types.objects.only('id').filter(id=tid)).exclude(status=3)
 	return render(request,"myweb/list.html",context)
 
 #商品详情页
@@ -49,6 +49,9 @@ def oneplus5(request):
 def details(request,gid):
 	context = loadContext(request)
 	context['goods'] = Goods.objects.get(id=gid)
+	ob = Goods.objects.get(id=gid)
+	ob.clicknum += 1
+	ob.save()
 	return render(request,"myweb/details.html",context)
 
 
@@ -72,6 +75,11 @@ def dologin(request):
 
 				# 此处登录成功，将当前登录信息放入到session中，并跳转页面
 				request.session['mywebuser'] = loginuser.username
+				request.session['webuserid'] = loginuser.id
+				request.session['webuseraddress'] = loginuser.address
+				request.session['webusername'] = loginuser.name
+				request.session['webuserphone'] = loginuser.phone
+				request.session['webusercode'] = loginuser.code
 				#print(json.dumps(user))
 				return redirect(reverse('index'))
 			else:
@@ -135,6 +143,11 @@ def verifycode(request):
 def logout(request):
     # 清除登录的session信息
     del request.session['mywebuser']
+    del request.session['webuserid']
+    del request.session['webuseraddress']
+    del request.session['webusername']
+    del request.session['webuserphone']
+    del request.session['webusercode']
     request.session['shoplist'] = {}
     # 跳转登录页面
     return redirect(reverse('login'))
@@ -183,4 +196,75 @@ def registuser(request):
 	else:
 		context = {'info':'两次密码不一致'}
 		return render(request,"myweb/register.html",context)
+
+
+#个人中心页面
+def personal(request,uid):
+	if uid != '':
+		ob = Users.objects.get(id=uid)
+		context = {'user':ob}
+		return render(request,"myweb/personal1.html",context)
+	else:
+		return render(request,"myweb/login.html")
+
+def personalupdate(request,uid):
+	# try:
+	ob = Users.objects.get(id= uid)
+	# ob.username = request.POST['username']
+	ob.name = request.POST['name']
+	ob.address = request.POST['address']
+	ob.sex = request.POST['sex']
+	ob.code = request.POST['code']
+	ob.phone = request.POST['phone']
+	ob.email = request.POST['email']
+	ob.save()
+	context = {'info':'修改成功！'}
+	# except:
+	#     context = {'info':'修改失败！'}
+	return render(request,"myweb/info.html",context)
+
+def myorders(request,uid):
+	context = {}
+	order = Order.objects.filter(uid=uid)
+	context['orderlist']=order
+	return render(request,"myweb/myorders.html",context)
+
+def orderdetail(request,uid):
+	# try:
+	# 获取要编辑的信息
+	context = {}
+	ob = Order.objects.get(id=uid)
+	dt = Detail.objects.filter(orderid = uid)
+		
+	# 获取商品的类别信息
+	# list = Types.objects.extra(select = {'_has':'concat(path,id)'}).order_by('_has')
+	# 放置信息加载模板
+	# context = {'orders':ob}
+	# context = {}
+	# context= {'detail':dt}
+	return render(request,"myweb/orderdetail.html",{'orders':ob,'detail':dt})
+
+def safe(request):
+	
+	return render(request,"myweb/safe.html")
+
+def changepassword(request):
+	m = hashlib.md5() 
+	m.update(bytes(request.POST['oldpassword'],encoding="utf8"))
+	ob = Users.objects.get(id=request.session['webuserid'])
+	if ob.password == m.hexdigest():
+		if request.POST['newpassword1'] == request.POST['newpassword2'] and request.POST['newpassword1'] != '':
+			p = hashlib.md5() 
+			p.update(bytes(request.POST['newpassword1'],encoding="utf8"))
+			ob.password = p.hexdigest()
+			ob.save()
+			context = {'info':'密码修改成功'}
+			return render(request,"myweb/safe.html",context)	
+		else:
+			context = {'info':'两次密码不一致'}
+			return render(request,"myweb/safe.html",context)
+	else:
+		context = {'info':'原始密码错误'}
+		return render(request,"myweb/safe.html",context)	
+
 

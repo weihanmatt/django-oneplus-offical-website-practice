@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse,JsonResponse
-from myadmin.models import Goods,Types
+from myadmin.models import Goods,Types,Order,Detail
 import time
 import hashlib
 
@@ -25,7 +25,8 @@ def loadlogin(request):
 
 #购物车
 def shopchart(request):
-	return render(request,"myweb/shopchart.html")
+	context = loadlogin(request)
+	return render(request,"myweb/shopchart.html",context)
 
 #加入购物车
 def shopchartadd(request,gid):
@@ -68,6 +69,70 @@ def shopchartchange(request):
     request.session['shoplist'] = shoplist
     return render(request,"myweb/shopchart.html",context)
 
+
+#订单页
+def order(request):
+	tt = request.GET.get('tt')
+	# request.session['total'] = tt
+	gids = tt.split(',')
+	shoplist = request.session['shoplist']
+	orderlist = {}
+	total = 0
+	# request.session['orderlist'] = {}
+	# return HttpResponse(gids[2])
+	for i in gids:
+		if i == '':
+			continue
+		orderlist[i] = shoplist[i]
+		total += shoplist[i]['price']*shoplist[i]['num']
+	request.session['orderlist'] = orderlist
+	request.session['total'] = total
+	context ={}
+	ob = Users.objects.get(id = request.session['webuserid'])
+	context['user'] = ob
+	# return HttpResponse(tt)
+	return render(request,"myweb/order.html",context)
+
+def orderconfirm(request):
+	context = {}
+	ob = Order()
+	ob.linkman = request.POST['name']
+	ob.address = request.POST['address']
+	ob.code = request.POST['code']
+	ob.phone = request.POST['phone']
+	context['order'] = ob
+	return render(request,"myweb/orderconfirm.html",context)
+
+def insertorder(request):
+	ob = Order()
+	ob.uid = request.session['webuserid']
+	ob.linkman = request.GET.get('linkman')
+	ob.address = request.GET.get('address')
+	ob.code = request.GET.get('code')
+	ob.phone = request.GET.get('phone')
+	ob.addtime = time.time()
+	ob.total = float(request.session['total'])
+	ob.save()
+	for shop in request.session['orderlist'].values():
+		detail = Detail()
+		detail.orderid = ob.id
+		detail.goodsid = shop['id']
+		detail.picname = Goods.objects.get(id=shop['id']).picname
+		detail.goodsname = shop['goods']
+		detail.price = shop['price']
+		detail.num = shop['num']
+		detail.save()
+	
+	shoplist = request.session['shoplist']
+
+	for lmt in request.session['orderlist']:
+		del shoplist[lmt]
+
+	# request.session['shoplist'] = {}
+	request.session['orderlist'] = {}
+	del request.session['total']
+	context ={'info':'下单成功'}
+	return render(request,"myweb/info.html",context)
 
 
 

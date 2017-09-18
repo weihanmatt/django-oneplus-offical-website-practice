@@ -153,21 +153,20 @@ def deleteuser(request,uid):
 
 # 执行信息编辑操作
 def updateuser(request,uid):
-	try:
-		ob = Users.objects.get(id= uid)
-		ob.username = request.POST['username']
-		ob.name = request.POST['name']
-		ob.password = request.POST['password']
-		ob.sex = request.POST['sex']
-		ob.code = request.POST['code']
-		ob.phone = request.POST['phone']
-		ob.email = request.POST['email']
-		ob.status = request.POST['status']
-		ob.addtime = request.POST['addtime']
-		ob.save()
-		context = {'info':'修改成功！'}
-	except:
-	    context = {'info':'修改失败！'}
+	# try:
+	ob = Users.objects.get(id= uid)
+	ob.username = request.POST['username']
+	ob.name = request.POST['name']
+	ob.password = request.POST['password']
+	ob.sex = request.POST['sex']
+	ob.code = request.POST['code']
+	ob.phone = request.POST['phone']
+	ob.email = request.POST['email']
+	ob.status = request.POST['status']
+	ob.save()
+	context = {'info':'修改成功！'}
+	# except:
+	#     context = {'info':'修改失败！'}
 	return render(request,"myadmin/info.html",context)
 
 

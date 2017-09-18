@@ -209,10 +209,11 @@ $(function () {
     // })
 
     //======================================总计==========================================
-
+    
+    var tt = 0
     function totalMoney() {
-        var total_money = 0;
         var total_count = 0;
+        var total_money = 0;
         var calBtn = $('.calBtn a');
         $sonCheckBox.each(function () {
             if ($(this).is(':checked')) {
@@ -221,6 +222,7 @@ $(function () {
                 total_money += goods;
                 total_count += num;
             }
+            tt = total_money
         });
         $('.total_text').html('￥'+total_money);
         $('.piece_num').html(total_count);
@@ -237,6 +239,33 @@ $(function () {
             }
         }
     }
+        
+    function loadTotal(){
+    var ids = [];
+    //alert('ok');
+    //获取所有选择的商品
+    var list = $("label").filter(".mark");
+    var total = 0.0;
+    for(var i=0;i<list.length;i++){
+       total += parseFloat($(list[i]).attr('price'));
+       ids.push($(list[i]).attr('gid'));
+    }
+    return ids;
+}
+
+        
+   $("#jss").click(function(){
+        if (tt == 0) {
+            return false
+        }
+        // alert(loadTotal())
+        location.href = $('#hht').html()+"?tt="+loadTotal().join(',');
+   })
+        
+        // $("#jss").click(function(){
+        //     location.href = $('#hht').html()+"?"+'gids='loadTotal().join(',');
+        
+        // })
 
 
 });

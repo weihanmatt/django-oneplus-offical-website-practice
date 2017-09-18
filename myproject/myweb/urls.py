@@ -17,6 +17,12 @@ urlpatterns = [
     url(r'^shopchartclear$', viewsorders.shopchartclear,name='shopchartclear'), #清空购物车
     url(r'^shopchartchange$', viewsorders.shopchartchange,name='shopchartchange'), #更改购物车中商品数量
 
+    #订单页
+    url(r'^order$', viewsorders.order, name="order"),
+    url(r'^orderconfirm$', viewsorders.orderconfirm, name="orderconfirm"),
+    url(r'^orderinsert$', viewsorders.insertorder, name="insertorder"),
+
+
 
     #登录
     url(r'^login$', views.login, name="login"),
@@ -27,6 +33,15 @@ urlpatterns = [
     # 注册
     url(r'^register$', views.register, name="register"),
     url(r'^registuser$', views.registuser, name="registuser"),
+
+    #个人中心
+    url(r'^personal(?P<uid>[0-9]*)$', views.personal, name="personal"),
+    url(r'^personalupdate(?P<uid>[0-9]*)$', views.personalupdate, name="personalupdate"),
+    url(r'^personalmyorders(?P<uid>[0-9]*)$', views.myorders, name="myorders"),
+    url(r'^personalorderdetail(?P<uid>[0-9]*)$', views.orderdetail, name="orderdetail"),
+    url(r'^personalsafe$', views.safe, name="safe"),
+    url(r'^personalchange$', views.changepassword, name="changepassword"),
+
 
     #商品列表页
     url(r'^mall$', views.mall, name="mall"),

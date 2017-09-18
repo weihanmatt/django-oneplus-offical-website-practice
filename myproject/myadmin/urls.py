@@ -1,7 +1,7 @@
 from django.conf.urls import include,url
 from django.contrib import admin
 
-from . import views, viewsgoods
+from . import views, viewsgoods, viewsorders
 
 urlpatterns = [
     #后台首页
@@ -39,5 +39,17 @@ urlpatterns = [
     url(r'^typedel/(?P<tid>[0-9]+)$', viewsgoods.deltype, name="myadmin_deltype"),
     url(r'^typeedit/(?P<tid>[0-9]+)$', viewsgoods.edittype, name="myadmin_edittype"),
     url(r'^typeupdate/(?P<tid>[0-9]+)$', viewsgoods.updatetype, name="myadmin_updatetype"),
+
+
+    url(r'^browseorders/(?P<pIndex>[0-9]*)$', viewsorders.browseorders, name='myadmin_browseorders'),
+    url(r'^deleteorders(?P<uid>[0-9]*)$', viewsorders.deleteorders, name="myadmin_deleteorders"),
+    url(r'^editorders(?P<uid>[0-9]*)$', viewsorders.editorders, name="myadmin_editorders"),
+    url(r'^updateorders(?P<uid>[0-9]*)$', viewsorders.updateorders, name="myadmin_updateorders"),
+
+
+
+
+
+
 
 ]

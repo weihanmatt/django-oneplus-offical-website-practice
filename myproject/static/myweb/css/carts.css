@@ -209,7 +209,7 @@ a:hover{
     left: 18px;
     float: left;
 }
-.order_lists .list_amount .amount_box a{
+.order_lists .list_amount .amount_box button{
     float: left;
     height: 23px;
     width: 17px;

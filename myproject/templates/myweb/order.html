@@ -1,0 +1,191 @@
+{% extends "myweb/base.html" %}
+{% load static from staticfiles %}
+{% block head %}
+	<link rel="stylesheet" type="text/css" href=" {% static "myweb/css/orderconfirm.css" %}"/>
+	<link rel="stylesheet" type="text/css" href=" {% static "myweb/css/tasp.css" %}"/>
+	<style>
+	#page{width:auto;}
+	#comm-header-inner,#content{width:950px;margin:auto;}
+	#logo{padding-top:26px;padding-bottom:12px;}
+	#header .wrap-box{margin-top:-67px;}
+	#logo .logo{position:relative;overflow:hidden;display:inline-block;width:140px;height:35px;font-size:35px;line-height:35px;color:#f40;}
+	#logo .logo .i{position:absolute;width:140px;height:35px;top:0;left:0;background:url(http://a.tbcdn.cn/tbsp/img/header/logo.png);}
+</style>
+
+{% endblock %}
+{%block block_name%}
+	<div id="page">
+
+ <div id="content" class="grid-c">
+
+  <div id="address" class="address" style="margin-top: 20px;" data-spm="2">
+<form action="{% url 'orderconfirm' %}" method="post">
+  {% csrf_token %}
+<h3>填写收货地址
+ <center>
+  <ul>
+   <li>姓名<input type="text" name="name" value="{{user.name}}"></li>
+   <br>
+   <li>电话<input type="text" name="phone" value="{{user.phone}}"></li>
+   <br>
+   <li>地址<input type="text" name="address" value="{{user.address}}"></li>
+   <br>
+   <li>邮编<input type="text" name="code" value="{{user.code}}"></li>
+
+  </ul>
+ </center>
+
+</div>
+ <table cellspacing="0" cellpadding="0" class="order-table" id="J_OrderTable" summary="统一下单订单信息区域">
+ <caption style="display: none">统一下单订单信息区域</caption>
+ <thead>
+ <tr>
+ <th class="s-title">店铺宝贝<hr/></th>
+ <th class="s-price">单价(元)<hr/></th>
+ <th class="s-amount">数量<hr/></th>
+ <th class="s-agio">优惠方式(元)<hr/></th>
+ <th class="s-total">小计(元)<hr/></th>
+ </tr>
+ </thead>
+     
+
+
+<tbody data-spm="3" class="J_Shop" data-tbcbid="0" data-outorderid="47285539868"  data-isb2c="false" data-postMode="2" data-sellerid="1704508670">
+<tr class="first"><td colspan="5"></td></tr>
+{% for goods in request.session.orderlist.values %}
+<tr class="shop blue-line">
+<!--  <td colspan="3">
+  店铺：<a class="J_ShopName J_MakePoint" data-point-url="http://log.mmstat.com/buy.1.6" href="http://store.taobao.com/shop/view_shop.htm?shop_id=104337282"
+target="_blank" title="淘米魅">淘米魅</a>
+    <span class="seller">卖家：<a href="http://member1.taobao.com/member/user_profile.jhtml?user_id=ac5831c32f47bc9267fcb75b71b5eed6" target="_blank" class="J_MakePoint" data-point-url="http://log.mmstat.com/buy.1.15">淘米魅</a></span>
+    <span class="J_WangWang"  data-nick="淘米魅"   data-display="inline" ></span>
+   
+   </td> -->
+ <td colspan="2" class="promo">
+ <div>
+   <ul class="scrolling-promo-hint J_ScrollingPromoHint">
+       </ul>
+   </div>
+ </td>
+</tr>
+ <tr class="item" data-lineid="19614514619:31175333266:35612993875" data-pointRate="0">
+ <td class="s-title">
+   <a href="#" target="_blank"  class="J_MakePoint" data-point-url="http://log.mmstat.com/buy.1.5">
+     <img src="/static/goods/m_{{goods.picname}}" class="itempic">{{goods.goods}}</span></a>
+
+   <div class="props">
+         </div>
+ 
+
+     </td>
+ <td class="s-price">
+   
+  <span class='price '>
+ <em class="style-normal-small-black J_ItemPrice"  >{{goods.price}}</em>
+  </span>
+<input type="hidden" name="costprice" value="630.00" class="J_CostPrice" />
+</td>
+ <td class="s-amount" data-point-url="">
+         <input type="hidden" class="J_Quantity" value="1" name="19614514619_31175333266_35612993875_quantity"/>{{goods.num}}
+ 
+ </td>
+ <td class="s-agio">
+       <div class="J_Promotion promotion" data-point-url="">无优惠</div>
+   </td>
+ <td class="s-total">
+   
+   <span class='price '>
+ <em class="style-normal-bold-red J_ItemTotal "  >{% widthratio  goods.price 1 goods.num %}</em>
+  </span>
+    <input id="furniture_service_list_b_47285539868" type="hidden" name="furniture_service_list_b_47285539868"/>
+ </td>
+</tr>
+{% endfor %}
+
+
+<tr class="item-service">
+ <td colspan="5" class="servicearea" style="display: none"></td>
+</tr>
+
+<tr class="blue-line" style="height: 2px;"><td colspan="5"></td></tr>
+<tr class="other other-line">
+ <td colspan="5">
+ <ul class="dib-wrap">
+ <li class="dib user-info">
+ <ul class="wrap">
+ <li>
+</li>
+   </ul>
+ </li>
+ <li class="dib extra-info">
+
+ <div class="shoparea">
+ <ul class="dib-wrap">
+ <li class="dib title">店铺优惠：</li>
+ <li class="dib sel"><div class="J_ShopPromo J_Promotion promotion clearfix" data-point-url="http://log.mmstat.com/buy.1.16"></div></li>
+ <li class="dib fee">  <span class='price '>
+ -<em class="style-normal-bold-black J_ShopPromo_Result"  >0.00</em>
+  </span>
+</li>
+ </ul>
+ </div>
+
+ <div class="shoppointarea"></div>
+
+   <div class="farearea">
+ 
+ </div>
+   <div class="extra-area">
+ 
+ </div>
+   
+   <div class="servicearea" style="display: none"></div>
+ </li>
+ </ul>
+ </td>
+</tr>
+
+<tr class="shop-total blue-line">
+ <td colspan="5">总计(<span class="J_Exclude" style="display: none">不</span>含运费<span class="J_ServiceText" style="display: none">，服务费</span>)：
+   <span class='price g_price '>
+ <span>&yen;</span><em class="style-middle-bold-red J_ShopTotal"  >{{request.session.total}}</em>
+  </span>
+  <input type="hidden" name="1704508670:2|creditcard" value="false" />
+<input type="hidden" id="J_IsLadderGroup" name="isLadderGroup" value="false"/>
+
+   </td>
+</tr>
+</tbody>
+  <tfoot>
+ <tr>
+ <td colspan="5">
+
+<div class="order-go" data-spm="4">
+<div class="J_AddressConfirm address-confirm">
+
+
+<div class="bd">
+
+      <button type="submit"><a id="J_Go" class=" btn-go"  data-point-url=""  tabindex="0" title="点击此按钮，提交订单。">提交订单<b class="dpl-button"></b></a></button>
+ </div>
+ </form>
+
+
+ <div class="J_confirmError confirm-error">
+ <div class="msg J_shopPointError" style="display: none;"><p class="error">积分点数必须为大于0的整数</p></div>
+ </div>
+
+
+ <!-- <div class="msg" style="clear: both;">
+ 
+ </div> -->
+
+
+ </td>
+ </tr>
+ </tfoot>
+ </table>
+</div>
+</div>
+<div style="width:100%; height:50px; background-color:#34373C;"></div>
+{% endblock %}

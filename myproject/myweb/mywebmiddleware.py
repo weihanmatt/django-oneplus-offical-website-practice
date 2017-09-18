@@ -15,7 +15,7 @@ class MywebMiddleware(object):
         path = request.path
         #print("Hello World!"+path)
         # 判断当前请求是否是访问购物车
-        if re.match("/shopchart",path):
+        if re.match("/shopchart",path) or re.match("/order",path) or re.match("/personal",path):
             # 判断当前用户是否没有登录
             if "mywebuser" not in request.session:
                 # 执行登录界面跳转

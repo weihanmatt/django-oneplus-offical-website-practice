@@ -25,7 +25,7 @@
 							<div class="control-group">
 								<label class="control-label" for="input01">密码</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="password" value="{{user.password}}"/>
+									<input type="password" class="input-xlarge" id="input01" name="password" value="{{user.password}}"/>
 								</div>
 							</div>
 							<div class="control-group">
@@ -55,9 +55,23 @@
 							<div class="control-group">
 								<label class="control-label" for="input01">状态</label>
 								<div class="controls">
-									<input type="text" class="input-xlarge" id="input01" name="status" value="{{user.status}}"/><span>1:启用 2:禁用 0:后台管理员</span>	
+									<input type="radio" class="input-xlarge" id="input01" value="1" name="status" 
+									{% if status == 1 %}
+										checked
+									{% endif %} 
+									/>启用
+									<input type="radio" class="input-xlarge" id="input01" value="2" name="status" 
+									{% if status == 2 %}
+										checked
+									{% endif %} 
+									/>禁用
+									<input type="radio" class="input-xlarge" id="input01" value="0" name="status" 
+									{% if status == 0 %}
+										checked
+									{% endif %} 
+									/>管理员
 								</div>
-							</div>				
+							</div>		
 							<div class="form-actions">
 								<button type="submit" class="btn btn-primary">Save</button> <button class="btn">Cancel</button>
 							</div>

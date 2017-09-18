@@ -1,0 +1,65 @@
+{% extends "myweb/personal.html" %}
+{% load static from staticfiles %}
+{% block content %}
+	<h1>
+		个人中心
+	</h1>
+	<form action="{% url 'personalupdate' user.id %}" method="post" class="form-horizontal">
+	{% csrf_token %}
+		<fieldset>
+			<legend>用户信息</legend>
+			<div class="control-group">
+				<label class="control-label" for="input01">姓名</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="name" value="{{user.name}}"/>
+				</div>
+			</div>
+			<hr>
+			<div class="control-group">
+							<label class="control-label" for="input01">性别</label>
+							<div class="controls">
+								<input type="radio" name="sex" class="input-xlarge" id="input01" 
+								{% if user.sex == 1 %}
+									checked  
+								{% endif %}
+								value="1" /> 男 
+								<input type="radio" name="sex" class="input-xlarge" id="input01" 
+								{% if user.sex == 0 %}
+									checked  
+								{% endif %}
+								value="0" /> 女
+								
+							</div>
+						</div>
+						<hr>	
+			<div class="control-group">
+				<label class="control-label" for="input01">地址</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="address" value="{{user.address}}"/>
+				</div>
+			</div>
+			<hr>
+			<div class="control-group">
+				<label class="control-label" for="input01">邮编</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="code" value="{{user.code}}"/>
+				</div>
+			</div>
+			<hr>
+			<div class="control-group">
+				<label class="control-label" for="input01">电话</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="phone" value="{{user.phone}}"/>
+				</div>
+			</div>
+			<hr>
+			<div class="control-group">
+				<label class="control-label" for="input01">邮箱</label>
+				<div class="controls">
+					<input type="text" class="input-xlarge" id="input01" name="email" value="{{user.email}}"/>
+				</div>
+			</div>
+			<hr>
+			<center><button class="btn btn-success btn-lg">保存</button></center>
+		</from>
+{% endblock %}

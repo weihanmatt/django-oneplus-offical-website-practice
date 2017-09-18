@@ -5,7 +5,7 @@
 {%block block_name%}
 				<div class="span9">
 					<h1>
-						商品信息
+						订单
 					</h1>
 					<table class="table table-bordered table-striped">
 						<thead>
@@ -14,28 +14,28 @@
 									ID
 								</th>
 								<th>
-									商品类别
+									用户id
 								</th>
 								<th>
-									商品名称
+									联系人
 								</th>
 								<th>
-									生产厂商
+									地址
 								</th>
 								<th>
-									价格
+									邮编
 								</th>
 								<th>
-									图片
+									联系电话
 								</th>
 								<th>
-									数量
-								</th>
-								<th>
-									状态
+									总价
 								</th>
 								<th>
 									添加时间
+								</th>
+								<th>
+									状态
 								</th>
 								<th>
 									操作
@@ -43,44 +43,45 @@
 							</tr>
 						</thead>
 						<tbody>
-						{% for goods in goodslist %}
+						{% for orders in orderslist %}
 							<tr>
 								<td>
-									{{goods.id}}
+									{{orders.id}}
 								</td>
 								<td>
-									{{goods.typename}}
+									{{orders.uid}}
 								</td>
 								<td>
-									{{goods.goods}}
+									{{orders.linkman}}
 								</td>
 								<td>
-									{{goods.company}}
+									{{orders.address}}
 								</td>
 								<td>
-									{{goods.price}}
+									{{orders.code}}
 								</td>
 								<td>
-									<img src="/static/goods/s_{{ goods.picname }}" alt="">
+									{{orders.phone}}
 								</td>
 								<td>
-									{{goods.num}}
+									{{orders.total}}
 								</td>
 								<td>
-									{% if goods.status == 1 %}
+									{{orders.addtime|dealwithtime}}
+								</td>
+								<td>
+									{% if orders.status == 0 %}
 										新添加
-									{% elif goods.status == 2%}
-										在售
+									{% elif orders.status == 1 %}
+										已发货
 									{% else %}
-										下架
+										已收货
 									{% endif %}	
 								</td>
+								
 								<td>
-									{{goods.addtime|dealwithtime}}
-								</td>
-								<td>
-									<a href="{% url 'myadmin_editgoods' goods.id %}">编辑</a>	
-									<a href="javascript:doDel('{% url 'myadmin_deletegoods' goods.id %}');">删除</a>
+									<a href="{% url 'myadmin_editorders' orders.id %}"><button class="btn btn-success">详情</button></a>	
+									<!-- <a href="javascript:doDel('{% url 'myadmin_deleteorders' orders.id %}');">删除</a> -->
 								</td>
 							</tr>
 						{% endfor %}
@@ -89,7 +90,7 @@
 					<div class="pagination">
 					{%for pindex in plist%}
 						<ul>
-							<li><a href={% url 'myadmin_browsegoods' pindex %}>{{pindex}}</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
+							<li><a href={% url 'myadmin_browseorders' pindex %}>{{pindex}}</a>&nbsp;&nbsp;&nbsp;&nbsp;</li>
 						</ul>
 					{% endfor %}
 					</div>

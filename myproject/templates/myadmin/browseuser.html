@@ -55,7 +55,11 @@
 									{{user.name}}
 								</td>
 								<td>
-									{{user.sex}}
+									{% if user.sex == 0 %}
+										女
+									{% elif user.sex == 1%}
+										男
+									{% endif %}	
 								</td>
 								<td>
 									{{user.code}}
@@ -67,7 +71,13 @@
 									{{user.email}}
 								</td>
 								<td>
-									{{user.status}}
+									{% if user.status == 0 %}
+										管理员
+									{% elif user.status == 1 %}
+										启用
+									{% else %}
+										禁用
+									{% endif %}
 								</td>
 								<td>
 									{{user.addtime|dealwithtime}}

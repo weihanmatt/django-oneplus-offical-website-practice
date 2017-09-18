@@ -1,0 +1,76 @@
+{% extends "myweb/personal.html" %}
+{% load static from staticfiles %}
+{% load dealwithtime %}
+{% block content %}
+	<h1>
+		我的订单
+	</h1>
+	<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>
+									收件人
+								</th>
+								<th>
+									收货地址
+								</th>
+								<th>
+									邮编
+								</th>
+								<th>
+									收件人电话
+								</th>
+								<th>
+									订单总价
+								</th>
+								<th>
+									下单时间
+								</th>
+								<th>
+									状态
+								</th>
+								<th>
+									操作
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for orders in orderlist %}
+							<tr>
+								<td>
+									{{orders.linkman}}
+								</td>
+								<td>
+									{{orders.address}}
+								</td>
+								<td>
+									{{orders.code}}
+								</td>
+								<td>
+									{{orders.phone}}
+								</td>
+								<td>
+									{{orders.total}}
+								</td>
+								<td>
+									{{orders.addtime|dealwithtime}}
+								</td>
+								<td>
+									{% if orders.status == 0 %}
+										新添加
+									{% elif orders.status == 1 %}
+										已发货
+									{% else %}
+										已收货
+									{% endif %}	
+								</td>
+								
+								<td>
+									<a href="{% url 'orderdetail' orders.id %}"><button class="btn btn-success">订单详情</button></a>	
+									<a href="javascript:doDel('{% url 'myadmin_deleteorders' orders.id %}');"><button class="btn btn-danger">申请退货</button></a>
+								</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>				
+{% endblock %}
