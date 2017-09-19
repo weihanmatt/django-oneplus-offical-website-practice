@@ -5,7 +5,7 @@
 	<h1>
 		我的订单
 	</h1>
-	<table class="table table-hover">
+	<table class="mui-table  table-hover">
 						<thead>
 							<tr>
 								<th>
@@ -57,7 +57,7 @@
 								</td>
 								<td>
 									{% if orders.status == 0 %}
-										新添加
+										未发货
 									{% elif orders.status == 1 %}
 										已发货
 									{% else %}
@@ -66,11 +66,29 @@
 								</td>
 								
 								<td>
-									<a href="{% url 'orderdetail' orders.id %}"><button class="btn btn-success">订单详情</button></a>	
-									<a href="javascript:doDel('{% url 'myadmin_deleteorders' orders.id %}');"><button class="btn btn-danger">申请退货</button></a>
+									<a href="{% url 'orderdetail' orders.id %}"><button class="mui-btn mui-btn--small  mui-btn--primary mui-btn--raised">订单详情</button></a>	
+									
+									{% if orders.status == 0  %}
+									<a href="sdfsdfsd"><button class="mui-btn mui-btn--small mui-btn--danger mui-btn--raised">取消订单</button></a>
+									{% elif orders.status == 1 %}
+									<a href="javascript:void(0)" class="airmax"><span class="hidden">{% url 'got' orders.id %}</span><button class="mui-btn mui-btn--small mui-btn--danger mui-btn--raised">确认收货</button></a>
+									{% else %}
+									<a href="#"><button class="mui-btn mui-btn--small mui-btn--danger mui-btn--raised">申请售后</button></a>
+									{% endif %}	
+								
 								</td>
 							</tr>
 						{% endfor %}
 						</tbody>
-					</table>				
+					</table>	
+					<script type="text/javascript">
+					$('.airmax').click(function(){
+						if(confirm('请在收到货物之后再确认收货?')){
+							window.location = $(this).find('span').html()
+						}
+						else{
+							return 
+						}
+					})
+					</script>			
 {% endblock %}

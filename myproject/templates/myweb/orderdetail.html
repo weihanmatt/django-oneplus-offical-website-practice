@@ -1,48 +1,44 @@
 {% extends "myweb/personal.html" %}
 {% load static from staticfiles %}
 {% block content %}
-<h3>
-		订单详情
-	</h3>
-	<form id="edit-profile" action="{% url 'myadmin_updateorders' orders.id %}" class="form-horizontal" method="post" enctype="multipart/form-data">
+	<form id="edit-profile" action="{% url 'myadmin_updateorders' orders.id %}" class="mui-form" method="post" enctype="multipart/form-data">
 		{% csrf_token %}
 		<fieldset>
 			<legend>查看订单信息</legend>
 			<div class="control-group">
 				<label class="control-label" for="input01">收件人</label>
-				<div class="controls">
+				<div class="mui-textfield">
 					<input type="text" readonly="true" name="linkman" value="{{ orders.linkman }}" class="input-xlarge" id="input01"/>
 				</div>
 			</div>
-			<hr>
+
 			<div class="control-group">
 				<label class="control-label" for="input01">收货地址</label>
-				<div class="controls">
+				<div class="mui-textfield">
 					<input type="text" readonly="true" name="address" value="{{ orders.address }}" class="input-xlarge" id="input01"/>
 				</div>
 			</div>
-			<hr>
+
 			<div class="control-group">
 				<label class="control-label" for="input01">邮编：</label>
-				<div class="controls">
+				<div class="mui-textfield">
 					<input type="text" readonly="true" name="code" value="{{ orders.code }}" class="input-xlarge" id="input01"/>
 				</div>
 			</div>
-			<hr>
+
 			<div class="control-group">
 				<label class="control-label" for="input01">收件人电话</label>
-				<div class="controls">
+				<div class="mui-textfield">
 					<input type="text" readonly="true" name="phone" value="{{ orders.phone }}" class="input-xlarge" id="input01"/>
 				</div>
 			</div>
-			<hr>
-			<div class="control-group">
+		<div class="control-group">
 				<label class="control-label" for="input01">订单总价</label>
-				<div class="controls">
+				<div class="mui-textfield">
 					<input type="text" readonly="true" name="total" value="{{ orders.total }}" class="input-xlarge" id="input01"/>
 				</div>
 			</div>
-			<hr>
+
 			<h3>商品信息</h3>
 			
 			<table class="table table-hover">

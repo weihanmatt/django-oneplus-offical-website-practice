@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^personalorderdetail(?P<uid>[0-9]*)$', views.orderdetail, name="orderdetail"),
     url(r'^personalsafe$', views.safe, name="safe"),
     url(r'^personalchange$', views.changepassword, name="changepassword"),
+    url(r'^personalgot(?P<oid>[0-9]*)$', views.got, name="got"),
 
 
     #商品列表页

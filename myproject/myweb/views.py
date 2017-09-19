@@ -36,7 +36,7 @@ def mall(request):
 	return render(request,"myweb/oneplus-mall.html",context)
 
 def list(request,tid):
-	context = loadContext(request)
+	context = loadlogin(request)
 	context['goodslist'] = Goods.objects.filter(typeid__in=Types.objects.only('id').filter(id=tid)).exclude(status=3)
 	return render(request,"myweb/list.html",context)
 
@@ -228,6 +228,18 @@ def myorders(request,uid):
 	order = Order.objects.filter(uid=uid)
 	context['orderlist']=order
 	return render(request,"myweb/myorders.html",context)
+
+#确认收货
+def got(request,oid):
+	ob = Order.objects.get(id = oid)
+	ob.status = 2
+	ob.save()
+	iidd = request.session['webuserid']
+
+	return redirect(reverse('myorders' ,args=[iidd]))
+
+
+
 
 def orderdetail(request,uid):
 	# try:

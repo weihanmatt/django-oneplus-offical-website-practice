@@ -4,33 +4,30 @@
 	<h1>
 		安全中心
 	</h1>
-	<form action="{% url 'changepassword' %}" method="post" class="form-horizontal">
+	<form action="{% url 'changepassword' %}" method="post" class="mui-form">
 	{% csrf_token %}
 		<fieldset>
 			<legend>更改密码</legend>
 			<div class="control-group">
 				<label class="control-label" for="input01">原始密码</label>
-				<div class="controls">
-					<input type="password" class="input-xlarge" id="input01" name="oldpassword" />
+				<div class="mui-textfield">
+					<input type="password"  id="input01" name="oldpassword" />
 				</div>
 			</div>
-            <hr>
 			<div class="control-group">
 				<label class="control-label" for="input01">新密码</label>
-				<div class="controls">
+				<div class="mui-textfield">
 					<input type="password" class="input-xlarge" id="input01" name="newpassword1" />
 				</div>
 			</div>
-            <hr>
 			<div class="control-group">
 				<label class="control-label" for="input01">确认密码</label>
-				<div class="controls">
+				<div class="mui-textfield">
 					<input type="password" class="input-xlarge" id="input01" name="newpassword2"/>
 				</div>
 			</div>
             <center><span style="color:red;">{{info}}</span></center>
-            <hr>
-			<center><button class="btn btn-success btn-lg">保存</button></center>
+			<button class="mui-btn mui-btn--raised">保存</button>
 	</form>
  	<script type="text/javascript">
     // 表单验证
@@ -44,7 +41,7 @@
     $('input').focus(function(){
         //获取焦点时,给予提示信息
         var at = $(this).attr('readme');
-        $(this).next('span').html(at).css('color','blue');
+        // $(this).next('span').html(at).css('color','blue');
         // $(this).css('border','1px solid blue');
     })
 
@@ -56,13 +53,13 @@
         var reg = /^\w{6,18}$/;
         if(reg.test(v)){
             // $(this).next('span').html('√').css('color','green');
-            $(this).css('border','1px solid green');
+            // $(this).css('border','1px solid green');
             //修改全局变量
             NameOk = true;
             console.log(312)
         }else{
             // $(this).next('span').html('用户名格式不正确').css('color','red');
-            $(this).css('border','1px solid red');
+            // $(this).css('border','1px solid red');
             //修改全局变量
             NameOk = false;
         }
@@ -76,12 +73,12 @@
         if(reg.test(v)){
             console.log(1111)
             // $(this).next('span').html('√').css('color','green');
-            $(this).css('border','1px solid green');
+            // $(this).css('border','1px solid green');
             //修改全局变量
             PassOk = true;
         }else{
             // $(this).next('span').html('密码格式不正确').css('color','red');
-            $(this).css('border','1px solid red');
+            // $(this).css('border','1px solid red');
                 //修改全局变量
             PassOk = false;
         }
@@ -94,12 +91,12 @@
         var reg = /^\w{6,18}$/;
         if(reg.test(v2)){
             // $(this).next('span').html('√').css('color','green');
-            $(this).css('border','1px solid green');
+            // $(this).css('border','1px solid green');
             //修改全局变量
             Pass2Ok = true;
         }else{
             // $(this).next('span').html('密码格式不正确').css('color','red');
-            $(this).css('border','1px solid red');
+            // $(this).css('border','1px solid red');
                 //修改全局变量
             Pass2Ok = false;
         }

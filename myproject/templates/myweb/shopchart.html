@@ -68,7 +68,7 @@
                         <p class="sum_price" id="sumjss">￥{% widthratio  goods.price 1 goods.num %}</p>
                     </li>
                     <li class="list_op">
-                        <p class="del"><a href="{% url 'shopchartdel' goods.id %}" class="delBtn">移除商品</a></p>
+                        <p class="del"><a href="{% url 'shopchartdel' goods.id %}" class="delBtn"><button class="btn btn-danger btn-sm">移除商品</button></a></p>
                     </li>
                 </ul>
             	{% endfor %}
